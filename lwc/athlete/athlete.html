@@ -1,0 +1,12 @@
+<template>
+    <lightning-card class="slds-size_medium" title="Create Athlete Record" icon-name="utility:identity">
+        <div class="slds-m-around_medium">
+            <lightning-record-form
+                key={recordFormKey}
+                object-api-name="Contact"
+                fields={fields}
+                onsuccess={handleSuccess}>
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+</template>

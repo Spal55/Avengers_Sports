@@ -1,0 +1,39 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Welcome to Avengers Fitness" icon-name="standard:social">
+        <div class="slds-p-around_medium">
+            <p><b>Height(cm)</b></p>
+            <lightning-input type="number" placeholder="Enter your Height in cm" value={hgt} onchange={handleHeight}></lightning-input>
+            <p class="slds-p-top_large"><b>Current Weight(Kg)</b></p>
+            <lightning-input type="number" placeholder="Enter your current weight in Kg" value={wgt} onchange={handleWeight}></lightning-input>
+        </div>
+        <div class="slds-p-top_medium slds-p-bottom_large slds-align_absolute-center">
+            <ul class="slds-button-group-row">
+                <li class="slds-button-group-item">
+                    <lightning-button variant="success" label="Calculate" onclick={calBMI}></lightning-button>
+                </li>
+                <li class="slds-button-group-item">
+                    <lightning-button variant="destructive" label="Clear" onclick={handleClear}></lightning-button>
+                </li>
+            </ul>
+        </div>
+        <div lwc:if={isbmi} class="slds-p-top_medium">
+            <p class="slds-text-heading_small slds-align_absolute-center">--- You BMI is -  <b>{bmi}</b> --- </p>
+            <p class="slds-text-heading_small slds-align_absolute-center">--- You are --> <b>  {bmiReport} </b> !!! --- </p>
+            <p lwc:if={isavail} class="slds-p-top_medium slds-align_absolute-center"><b> Enhance Your Fitness Game with Us, Click Next </b></p>
+            <div lwc:if={isavail} class="slds-p-top_medium slds-p-bottom_large slds-align_absolute-center">
+                <ul class="slds-button-group-row">
+                    <li class="slds-button-group-item">
+                        <lightning-button variant="brand" label="Next" onclick={callfitness}></lightning-button>
+                    </li>
+                    <li class="slds-button-group-item">
+                        <lightning-button variant="brand-outline" label="Close" onclick={closebmi}></lightning-button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </lightning-card>
+    <template lwc:if={isfitness} >
+        <c-improve-fitness height={hgt} iweight={wgt} onclose ={closefitness}></c-improve-fitness>
+    </template>
+
+</template>

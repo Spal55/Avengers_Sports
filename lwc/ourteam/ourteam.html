@@ -1,0 +1,19 @@
+<template>
+    <lightning-card class="team-section slds-p-bottom_large">
+        <div class="slds-p-around_medium">
+           <h2 class="heading"><span>Meet Our Team</span> </h2>
+        </div>    
+        <div class="team-members slds-p-bottom_large slds-p-around_medium">
+            <template class="slds-align_center slds-p-around_medium slds-p-bottom_large" for:each={teamMembers} for:item="member">
+                <a key={member.id} href={member.mailid} target="_blank">
+                <lightning-card key={member.id} title={member.name} class="teamcard" data-aos="fade-right">
+                    <img src={member.photoUrl} alt={member.name} class="photo" /> 
+                    <div class="slds-card__body slds-card__body_inner slds-p-bottom_large">
+                        <p>Role - {member.role}</p>
+                    </div>
+                </lightning-card>
+                </a>
+            </template>
+        </div>
+    </lightning-card>
+</template>

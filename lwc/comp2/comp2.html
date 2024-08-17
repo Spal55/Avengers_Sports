@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Athletes In Event" icon-name="utility:identity">
+        <div class="slds-p-around_medium">
+            <template if:true={athletesInEvent}>
+                <ol class="slds-list_vertical slds-has-dividers_bottom-space">
+                    <template for:each={athletesInEvent} for:item="athlete" for:index="index">
+                        <li key={athlete.Id} class="slds-item slds-m-bottom_small">
+                            <p class="slds-text-heading_medium">{athlete.Athlete__r.Name}</p>
+                        </li>
+                    </template>
+                </ol>
+            </template>
+            <template if:false={athletesInEvent}>
+                <p class="slds-text-color_weak slds-p-top_medium" style=" color: red;font-weight: bold; text-align: center; font_size: 15px">No athlete has participated yet.</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

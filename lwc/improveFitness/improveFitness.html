@@ -1,0 +1,181 @@
+<template>
+    <lightning-card  variant="Narrow"  title="Choose The Right Fitness" icon-name="standard:social">
+        <div class="slds-p-around_medium">
+            <lightning-input class="slds-p-top_small strong-text" type="text" placeholder="Enter your Name" label="Name" onchange={handleNameChange} required></lightning-input>
+            <lightning-input class="slds-p-top_small strong-text" type="number" placeholder="Enter your Age in years" label="Age(years)" onchange={handleAgeChange} required></lightning-input>
+            <lightning-combobox
+                name="gender"
+                class="slds-p-top_small strong-text"
+                label="Gender"
+                value={value}
+                placeholder="Select Gender"
+                options={options}
+                onchange={handleGenderChange}
+                required>
+            </lightning-combobox>
+            <lightning-input class="slds-p-top_small strong-text" type="number" placeholder="Enter your target weight in kg" label="Target Weight(Kg)" onchange={handleTargetChange} required></lightning-input>
+        </div>
+        <div class="slds-p-top_medium slds-p-bottom_large slds-align_absolute-center">
+            <ul class="slds-button-group-row">
+                <li class="slds-button-group-item">
+                    <lightning-button variant="brand" label="With Workout" onclick={showModalBox1}></lightning-button>
+                </li>
+                <li class="slds-button-group-item">
+                    <lightning-button variant="brand" label="Without Workout" onclick={showModalBox2}></lightning-button>
+                </li>
+                <li class="slds-button-group-item">
+                    <lightning-button variant="brand-outline" label="Back" onclick={close}></lightning-button>
+                </li>
+            </ul>
+        </div>
+
+        <template lwc:if={isShowModal1}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                            <lightning-icon icon-name="utility:close"
+                                alternative-text="close"
+                                variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Hi, <b>{name}</b></h2>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >1st Week : </p>
+                            <p> Don't consume more than <b>{calorie1}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days Workout : </b></p>
+                                <p> Do 20 pushups and 20 squats 5-10 chinups daily with free-hand exercises</p>
+                            </div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >2nd Week : </p>
+                            <p> Don't consume more than <b>{calorie2}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days Workout : </b></p>
+                                <p> Do 30 pushups and 30 squats 10-20 chinups daily with free-hand exercises</p>
+                            </div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >3rd Week : </p>
+                            <p> Don't consume more than <b>{calorie3}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days Workout : </b></p>
+                                <p> Do 50 pushups and 40 squats 10-20 chinups daily with free-hand exercises</p>
+                            </div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >4th Week : </p>
+                            <p> Don't consume more than <b>{calorie4}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days Workout : </b></p>
+                                <p> Do 50 pushups and 50 squats 20-30 chinups daily with free-hand exercises</p>
+                            </div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >5th Week : </p>
+                            <p> Don't consume more than <b>{calorie5}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days Workout : </b></p>
+                                <p> Do 60 pushups and 60 squats 20-30 chinups daily with free-hand exercises</p>
+                            </div>
+                        </div>
+                        <div lwc:if={isloss} class="slds-p-top_medium slds-align_absolute-center">
+                            <p> Walk<b> 5000-10,000 </b>steps daily</p>
+                        </div>
+                        <div class="slds-p-top_large slds-p-around_medium slds-align_absolute-center">
+                            <p><b>For more get personalized plan, Contact at : 8637567454 </b></p>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="success" label="Chat with Expert" icon-name="utility:chat" onclick={navigateToWebPage}></lightning-button>
+                    </footer>
+       
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+        <template lwc:if={isShowModal2}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={hideModalBox}>
+                            <lightning-icon icon-name="utility:close"
+                                alternative-text="close"
+                                variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Hi, <b>{name}</b></h2>
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >1st Week : </p>
+                            <p> Don't consume more than <b>{calorie1}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>2 days : </b></p>
+                                <p lwc:if={isfast}> Do<b> intermittent </b>fasting</p>
+                            </div>
+                            <div class="slds-align_absolute-center"><p> Walk<b> 2000 steps  </b>daily</p></div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >2nd Week : </p>
+                            <p> Don't consume more than <b>{calorie2}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>3 days : </b></p>
+                                <p lwc:if={isfast}> Do<b> intermittent </b>fasting</p>
+                            </div>
+                            <div class="slds-align_absolute-center"><p> Walk<b> 3000 steps  </b>daily</p></div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >3rd Week : </p>
+                            <p> Don't consume more than <b>{calorie3}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days : </b></p>
+                                <p lwc:if={isfast}> Do<b> intermittent </b>fasting</p>
+                            </div>
+                            <div class="slds-align_absolute-center"><p> Walk<b> 4000 steps  </b>daily</p></div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >4th Week : </p>
+                            <p> Don't consume more than <b>{calorie4}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>4 days : </b></p>
+                                <p lwc:if={isfast}> Do<b> intermittent </b>fasting</p>
+                            </div>
+                            <div class="slds-align_absolute-center"><p> Walk<b> 5000 steps  </b>daily</p></div>
+                        </div>
+                        <div class="slds-p-top_medium">
+                            <p class="slds-text-heading_small" >5th Week : </p>
+                            <p> Don't consume more than <b>{calorie5}</b> calories daily</p>
+                            <div class="slds-p-top_small slds-align_absolute-center">
+                                <p><b>5 days : </b></p>
+                                <p lwc:if={isfast}> Do<b> intermittent </b>fasting</p>
+                            </div>
+                            <div class="slds-align_absolute-center"><p> Walk<b> 6000 steps  </b>daily</p></div>
+                        </div>
+                        <div lwc:if={isloss} class="slds-p-top_medium slds-align_absolute-center">
+                            <p> Walk extra<b> 2000-5000 </b>steps daily</p>
+                        </div>
+                        <div class="slds-p-top_medium slds-p-around_medium slds-align_absolute-center">
+                            <p><b>For more get personalized plan, Contact at : 8637567454 </b></p>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button variant="success" label="Chat with Expert" icon-name="utility:chat" onclick={navigateToWebPage}></lightning-button>
+                    </footer>
+       
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </lightning-card> 
+
+</template>

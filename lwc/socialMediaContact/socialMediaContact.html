@@ -1,0 +1,21 @@
+<template>
+    <lightning-card >
+        <div class="contact-info slds-m-around_medium" style="text-align: center;">
+            <h2><Strong style="font-size : 20px">Contact Information</Strong> </h2>
+            <p><strong style="color: red;">Name:</strong> {contactInfo.name}</p>
+            <p><strong style="color: red;">Email:</strong> {contactInfo.email}</p>
+            <p><strong style="color: red;">Phone:</strong> {contactInfo.phone}</p>
+        </div>
+        <div class="social-media-heading slds-grid slds-grid_align-center" style="text-align: center;">
+            <h2 style="font-size: 15px;">Follow us on Social Media</h2>
+        </div>
+        <div class="social-media-links slds-grid slds-grid_align-center" style="text-align: center;">
+            <template for:each={socialMediaLinks} for:item="link">
+                <a key={link.name} href={link.url} style="padding: 0 1rem;">
+                    <img src={link.icon} alt={link.name} title={link.name} style="width: 24px; height: 24px; margin-right: 5px;"></img>
+                    <span style="font-size: 15px;">{link.name}</span>
+                </a>
+            </template>
+        </div>
+    </lightning-card>
+</template>

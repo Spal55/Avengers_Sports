@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Event Results" icon-name="custom:custom48">
+        <div class="slds-m-around_medium">
+            <lightning-record-view-form record-id={recordId} object-api-name="Event__c">
+                <template lwc:if={isCricket}>
+                    <lightning-output-field field-name="Most_runs__c"></lightning-output-field>
+                    <lightning-output-field field-name="Most_wicket__c"></lightning-output-field>
+                    <lightning-output-field field-name="Man_of_the_match__c"></lightning-output-field>
+                </template>
+ 
+                <template lwc:if={isFootballOrHockey}>
+                    <lightning-output-field field-name="Most_goals__c"></lightning-output-field>
+                    <lightning-output-field field-name="Man_of_the_match__c"></lightning-output-field>                   
+                </template>
+
+                <template lwc:if={isRunningOrJumping}>
+                    <lightning-output-field field-name="First_athlete__c"></lightning-output-field>
+                    <lightning-output-field field-name="Second_athlete__c"></lightning-output-field>
+                    <lightning-output-field field-name="Third_athlete__c"></lightning-output-field>
+                </template>
+
+                
+            </lightning-record-view-form>
+        </div>
+    </lightning-card>
+</template>
